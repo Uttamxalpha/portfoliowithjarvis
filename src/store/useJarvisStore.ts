@@ -192,7 +192,8 @@ export const useJarvisStore = create<JarvisStore>()(
 
       checkBackendHealth: async () => {
         try {
-          const res = await fetch("http://localhost:8000/health", { signal: AbortSignal.timeout(2000) });
+          const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+          const res = await fetch(`${apiBase}/health`, { signal: AbortSignal.timeout(2000) });
           if (res.ok) {
             const data = await res.json();
             if (data.status === "ok") {

@@ -239,7 +239,8 @@ export default function JarvisCommandCenter() {
       
       if (!useMock) {
         try {
-          response = await fetch("http://localhost:8000/chat/stream", {
+          const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+          response = await fetch(`${apiBase}/chat/stream`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: queryText }),
