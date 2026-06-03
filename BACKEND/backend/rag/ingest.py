@@ -124,7 +124,7 @@ def store_in_chroma(chunks: list[Document]) -> int:
 
     try:
         client.delete_collection(CHROMA_COLLECTION)
-    except ValueError:
+    except Exception:
         pass
 
     collection = client.get_or_create_collection(name=CHROMA_COLLECTION)
