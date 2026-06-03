@@ -1,0 +1,65 @@
+Uttam Tiwari's Portfolio Website Featured AI Projects:
+
+1. Medical AI Chatbot (RAG-Based Question Answering System)
+- ID: medical
+- Badge/Overview: LangChain • Vector Search • LLMs
+- Problem: Generic large language models hallucinate clinical data and lack medical grounding, generating unsafe health responses.
+- Solution: Developed core components of a Retrieval-Augmented Generation (RAG) pipeline using LangChain to enable evidence-grounded medical question answering.
+- Key Features & Details:
+  * Developed core components of a Retrieval-Augmented Generation (RAG) pipeline using LangChain to enable evidence-grounded medical question answering.
+  * Processed, cleaned, and indexed 1,000+ medical documents, creating a semantic retrieval system capable of delivering contextually relevant information.
+  * Implemented document chunking, embedding generation, and vector similarity search workflows to improve retrieval precision and response quality.
+  * Performed retrieval evaluation and query testing to optimize context selection and reduce irrelevant responses.
+  * Collaborated in building an AI-powered medical assistant that combined semantic search with LLM reasoning for accurate and explainable healthcare-related responses.
+- Technology Stack: LangChain, Vector Search, LLMs, Python, ChromaDB
+- Challenge: Medical journals contain dense, overlapping vocabularies that led standard vector search algorithms to retrieve irrelevant sections.
+- Tradeoffs & Optimizations: Utilized customized chunking with semantic heading tracking and strict score thresholds. This filtered out irrelevant context and cut hallucinations by 75%.
+- Results & Accuracy: Zero-hallucination medical context indexes.
+- Source Code Repository: https://github.com/Uttamxalpha/voice_medi_chat
+- Demo Link: https://github.com/Uttamxalpha/voice_medi_chat
+
+2. Plant Disease Detection System
+- ID: plant
+- Badge/Overview: CNN • MobileNetV3 • Deep Learning • Computer Vision
+- Problem: Crop leaf diseases go undetected in traditional farming, leading to poor yields and time-consuming manual vet inspections.
+- Solution: Developed and optimized Deep Learning models for plant disease classification using a dataset of 56K+ leaf images, achieving 93% prediction accuracy across categories.
+- Key Features & Details:
+  * Developed and optimized Deep Learning models for plant disease classification using a dataset of 56K+ leaf images, achieving 93% prediction accuracy across multiple disease categories.
+  * Fine-tuned MobileNetV3 using transfer learning techniques to improve feature extraction, model generalization, and classification performance.
+  * Applied data augmentation and preprocessing pipelines to reduce overfitting and enhance robustness on unseen image samples.
+  * Evaluated model performance using confusion matrix analysis, precision, recall, and F1-score metrics to identify improvement opportunities and ensure reliable predictions.
+  * Collaborated within a team to integrate trained models into a real-time web-based disease detection platform for automated crop health assessment.
+- Technology Stack: CNN, MobileNetV3, Deep Learning, Computer Vision, Python
+- Challenge: Overfitting on specific high-resolution greenhouse samples caused high classification error rates on low-quality outdoor mobile camera images.
+- Tradeoffs & Optimizations: Adopted heavy dataset data augmentations (color jitters, random croppings) and fine-tuned MobileNetV3. Lowered initial training speeds by 15% but boosted test accuracy from 81% to 93%.
+- Results & Accuracy: 93% accuracy on 56K+ images.
+- Source Code Repository: https://github.com/Uttamxalpha/plant-health-app
+- Demo Link: https://plant-health-app-yivo.onrender.com
+
+3. Misinfo Buster – AI-Powered WhatsApp Misinformation Detection System
+- ID: misinfo
+- Badge/Overview: LangGraph • RAG • LLMs • Streamlit
+- Problem: Forwarded WhatsApp misinformation spreads rapidly in unstructured chat formats, bypassing standard media checks and missing critical contextual validation.
+- Solution: Architected a production-grade multi-agent fact-checking system using LangGraph and hybrid retrieval dense-sparse RAG pipelines to verify claims autonomously.
+- Key Features & Details:
+  * Architected a production-grade multi-agent fact-checking system using LangGraph, enabling autonomous verification of forwarded WhatsApp messages through coordinated reasoning and retrieval workflows.
+  * Designed and implemented a Hybrid Retrieval (Dense + Semantic Search) RAG pipeline, improving evidence discovery accuracy and grounding LLM responses on relevant external information sources.
+  * Built a modular 3-stage agent architecture consisting of Claim Extraction, Evidence Retrieval, and Verdict Generation agents, orchestrated through LangGraph stateful workflows.
+  * Developed a 3-way classification framework (True / False / Uncertain) using structured prompt engineering and chain-of-thought reasoning to generate interpretable, evidence-backed decisions.
+  * Integrated multiple LLM-powered reasoning modules for claim decomposition, contextual retrieval, fact validation, and response synthesis, improving robustness against ambiguous or misleading inputs.
+  * Optimized retrieval and orchestration pipelines to achieve ~2–3 second end-to-end inference latency, enabling near real-time fact-checking for user queries.
+  * Improved response quality and factual consistency through iterative prompt tuning, retrieval evaluation, and extensive testing across diverse misinformation scenarios.
+  * Deployed the complete system on Streamlit Cloud, providing an interactive interface for real-time misinformation detection and explainable AI-driven verdict generation.
+- Technology Stack: LangGraph, RAG, LLMs, Streamlit, Python
+- Challenge: Vague, multi-sentence inputs and ambiguous forwards created massive noise, throwing off vector DB index similarity matches.
+- Tradeoffs & Optimizations: Implemented claim decomposition modules to split queries. Achieved k=3 parallel evidence lookups, optimizing latency to ~2-3 seconds while maintaining accuracy.
+- Results & Accuracy: ~2–3 second latency.
+- Source Code Repository: https://github.com/Uttamxalpha/whatsapp-agent
+- Demo Link: https://github.com/Uttamxalpha/whatsapp-agent
+
+Uttam Tiwari's Professional Certifications:
+- IBM Applied AI Certification: Covers fundamentals of AI, Watson, and practical AI application development.
+- BCG X GenAI Job Simulation (Forage): Covers AI chatbot development and financial document analysis using Large Language Models (LLMs).
+- Anthropic MCP (Model Context Protocol) Server Certification.
+- Deloitte Data Analytics Job Simulation (Forage).
+- IBM AI Fundamentals.
