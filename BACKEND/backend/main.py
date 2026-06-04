@@ -75,6 +75,14 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+async def root():
+    return {
+        "message": "UttamBot API is running. Visit /health for status or /docs for interactive documentation."
+    }
+
+
+
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=500)
 
