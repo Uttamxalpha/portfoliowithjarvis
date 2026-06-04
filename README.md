@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 Jarvis OS — AI Portfolio Agent
 
-## Getting Started
+A next-generation personal portfolio & recruiter-focused interactive workspace built for **Uttam Tiwari (AI Engineer)**. 
 
-First, run the development server:
+This repository is structured as a Monorepo containing:
+* **Frontend**: A high-fidelity Next.js web application modeled after advanced AI operating systems, complete with DeepSeek R1-style "Thinking" states and Perplexity-style citation lists.
+* **Backend**: A robust FastAPI RAG (Retrieval-Augmented Generation) microservice powered by LangGraph, ChromaDB, and Groq SDK.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## ⚡ Live Demos
+
+* **Frontend (Vercel)**: [https://portfoliowithjarvis.vercel.app/](https://portfoliowithjarvis.vercel.app/)
+* **Backend (Render)**: [https://portfolio-backend-yzzm.onrender.com/health](https://portfolio-backend-yzzm.onrender.com/health)
+
+---
+
+## 🧠 Key Features
+
+1. **Stateful Chat Workflows (LangGraph)**: The backend utilizes a stateful LangGraph router to verify queries, decide if the question is relevant to Uttam's professional profile, query the vector DB, and stream context-grounded responses.
+2. **DeepSeek R1-Style "Thinking" Logs**: Visually trace the model's multi-step cognitive reasoning layers (Query parsing -> Vector retrieval -> Context grounding -> LLM formulating) in real-time.
+3. **Perplexity-Style Citations**: Automatic source citation showing exactly where in the knowledge base (resume, website details, or GitHub links) the information was extracted from.
+4. **Zero-Overhead ONNX Embeddings**: Employs lightweight, CPU-optimized ONNX-based sentence transformers (`ONNXMiniLM_L6_V2`) integrated inside ChromaDB, bypassing memory-heavy PyTorch imports to run comfortably within a 512MB RAM server container.
+5. **Interactive OS UI**: Clean dark-mode UI styled using TailwindCSS, framer-motion animations, custom terminal simulation, and Zustand state store.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+    User([User Client]) -->|1. Query| FE[Next.js App]
+    FE -->|2. Stream Request| BE[FastAPI Endpoint]
+    BE -->|3. Route Query| LG[LangGraph Workflow]
+    LG -->|4. Classify Query| Classifier{Is Relevant?}
+    Classifier -->|No| Fallback[Return Contact Info]
+    Classifier -->|Yes| VectorDB[(ChromaDB ONNX Index)]
+    VectorDB -->|5. Retrieve Context Chunks| LG
+    LG -->|6. Ground Context| LLM[Groq: Llama 3.3 70B]
+    LLM -->|7. Generate Response Stream| BE
+    BE -->|8. Stream Event-Source SSE| FE
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── BACKEND/
+│   └── backend/
+│       ├── main.py                 # FastAPI Application Server
+│       ├── rag/
+│       │   ├── config.py           # Configs & Environment Loaders
+│       │   ├── embeddings.py       # Custom ONNX Embeddings Interface
+│       │   ├── ingest.py           # Document Ingestion Pipeline
+│       │   ├── retriever.py        # ChromaDB Vector Store Singleton
+│       │   └── workflow.py         # LangGraph Stateful Agent Workflow
+│       └── requirements.txt        # Backend dependencies
+├── src/                            # Frontend Next.js Source Code
+│   ├── components/                 # React UI Components (Terminal, Command Center, Prompt Box)
+│   ├── store/                      # Zustand State Management (useJarvisStore)
+│   └── utils/                      # Helper scripts
+├── package.json                    # Frontend dependencies
+└── README.md
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Setup & Run Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Prerequisites
+Ensure you have **Node.js (v18+)** and **Python 3.10+** installed on your system.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 2. Environment Variables
 
-## Deploy on Vercel
+Create a `.env` file in the **`BACKEND/backend/`** directory:
+```env
+GROQ_API_KEY=your_groq_api_key
+INGEST_SECRET=your_custom_ingestion_secret
+FRONTEND_ORIGIN=http://localhost:3000
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Running the Backend
+```bash
+# Navigate to the backend directory
+cd BACKEND/backend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Create a virtual environment & activate it
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the ingestion script to populate ChromaDB
+python3 -m rag.ingest
+
+# Start the FastAPI server
+uvicorn main:app --reload --port 8000
+```
+Verify the backend is live at [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
+
+### 4. Running the Frontend
+```bash
+# Navigate back to the root directory
+cd ../..
+
+# Install node dependencies
+npm install
+
+# Start the Next.js development server
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to interact with Jarvis OS.
+
+---
+
+## 🌐 Production Deployment
+
+### Backend (Render Web Service)
+* **Build Command**: `pip install -r requirements.txt && python -m rag.ingest`
+* **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+* **Environment Variables**: Set `GROQ_API_KEY`, `INGEST_SECRET`, and `FRONTEND_ORIGIN` (pointing to your Vercel URL).
+
+### Frontend (Vercel)
+* **Framework Preset**: Next.js
+* **Root Directory**: `./` (Root of the repo)
+* **Environment Variables**: Set `NEXT_PUBLIC_API_URL` to point to the live Render backend URL.
