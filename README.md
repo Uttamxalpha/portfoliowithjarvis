@@ -5,6 +5,8 @@ A next-generation personal portfolio & recruiter-focused interactive workspace b
 This repository is structured as a Monorepo containing:
 * **Frontend**: A high-fidelity Next.js web application modeled after advanced AI operating systems, complete with DeepSeek R1-style "Thinking" states and Perplexity-style citation lists.
 * **Backend**: A robust FastAPI RAG (Retrieval-Augmented Generation) microservice powered by LangGraph, ChromaDB, and Groq SDK.
+<img width="1469" height="809" alt="Screenshot 2026-06-04 at 5 07 49 AM" src="https://github.com/user-attachments/assets/c1c4bc63-5885-4d56-aa45-601b263f877c" />
+
 
 ---
 
@@ -12,6 +14,8 @@ This repository is structured as a Monorepo containing:
 
 * **Frontend (Vercel)**: [https://portfoliowithjarvis.vercel.app/](https://portfoliowithjarvis.vercel.app/)
 * **Backend (Render)**: [https://portfolio-backend-yzzm.onrender.com/health](https://portfolio-backend-yzzm.onrender.com/health)
+<img width="1469" height="809" alt="Screenshot 2026-06-04 at 5 08 46 AM" src="https://github.com/user-attachments/assets/5eb73728-bdbb-4908-944b-a6227034504c" />
+
 
 ---
 
@@ -22,6 +26,8 @@ This repository is structured as a Monorepo containing:
 3. **Perplexity-Style Citations**: Automatic source citation showing exactly where in the knowledge base (resume, website details, or GitHub links) the information was extracted from.
 4. **Zero-Overhead ONNX Embeddings**: Employs lightweight, CPU-optimized ONNX-based sentence transformers (`ONNXMiniLM_L6_V2`) integrated inside ChromaDB, bypassing memory-heavy PyTorch imports to run comfortably within a 512MB RAM server container.
 5. **Interactive OS UI**: Clean dark-mode UI styled using TailwindCSS, framer-motion animations, custom terminal simulation, and Zustand state store.
+<img width="1469" height="809" alt="Screenshot 2026-06-04 at 5 08 42 AM" src="https://github.com/user-attachments/assets/5d46e02d-94a1-45d1-a9ab-eb2418c9f6a0" />
+
 
 ---
 
